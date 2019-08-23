@@ -1,0 +1,65 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ * 
+ * typedef struct ListNode listnode;
+ * 
+ * listnode* listnode_new(int val) {
+ *     listnode* node = (listnode *) malloc(sizeof(listnode));
+ *     node->val = val;
+ *     node->next = NULL;
+ *     return node;
+ * }
+ */
+/**
+ * @input A : Head pointer of linked list 
+ * 
+ * @Output head pointer of list.
+ */
+ listnode* reverseList(listnode* curr){
+     listnode* first = curr;
+     listnode* second = NULL;
+     if(first){
+         second = first->next;
+     }
+     if(!second){
+         return first;
+     }
+     else{
+         listnode* h = reverseList(second);
+         first->next = second->next;
+         second->next = first;
+         return h;
+     }
+ }
+ 
+listnode* reorderList(listnode* head) {
+    
+        listnode* ptr1 = head;
+        listnode* ptr2 = head;
+        while(ptr2->next!=NULL && ptr2->next->next){
+            ptr1 = ptr1->next;
+            ptr2 = ptr2->next->next;
+        }
+        listnode* head2 = reverseList(ptr1->next);
+        ptr1->next = NULL;
+        listnode* curr = head;
+        listnode* temp1 = head;
+        listnode* temp2 = head2;
+        while(temp1 || temp2){
+            if(temp1){
+                temp1 = temp1->next;
+                curr->next = temp2;
+                curr = curr->next;
+            }
+            if(temp2){
+                temp2 = temp2->next;
+                curr->next = temp1;
+                curr = curr->next;
+            }
+        }
+        return head;
+}
