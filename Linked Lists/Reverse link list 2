@@ -1,0 +1,69 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ * 
+ * typedef struct ListNode listnode;
+ * 
+ * listnode* listnode_new(int val) {
+ *     listnode* node = (listnode *) malloc(sizeof(listnode));
+ *     node->val = val;
+ *     node->next = NULL;
+ *     return node;
+ * }
+ */
+/**
+ * @input A : Head pointer of linked list 
+ * @input B : Integer
+ * @input C : Integer
+ * 
+ * @Output head pointer of list.
+ */
+ 
+
+listnode* reverselist(listnode* curr,listnode* ptr2){
+     
+     listnode* first = curr;
+     listnode* second = NULL;
+     if(first){
+         second = first->next;
+     }
+     if(first==ptr2){
+         return first;
+     }
+     else{
+         listnode* h = reverselist(second,ptr2);
+         first->next = second->next;
+         second->next = first;
+         return h;
+     }
+     
+ }
+listnode* reverseBetween(listnode* head, int i1, int i2) {
+    
+    int c1 = 1;
+    int c2 = 1;
+    listnode* ans = NULL;
+    listnode* prev = head;
+    listnode* ptr1 = head;
+    listnode* ptr2 = head;
+    while(ptr1!=NULL && c1!=i1){
+        c1++;
+        prev = ptr1;
+        ptr1 = ptr1->next;
+    }
+    while(ptr2!=NULL && c2!=i2){
+        c2++;
+        ptr2 = ptr2->next;
+    }
+    ans = reverselist(ptr1,ptr2);
+    if(i1 == 1){
+        head = ans;
+    }
+    else{
+        prev->next = ans;
+    }
+    return head;
+}
