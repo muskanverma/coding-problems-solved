@@ -1,0 +1,49 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ * 
+ * typedef struct ListNode listnode;
+ * 
+ * listnode* listnode_new(int val) {
+ *     listnode* node = (listnode *) malloc(sizeof(listnode));
+ *     node->val = val;
+ *     node->next = NULL;
+ *     return node;
+ * }
+ */
+/**
+ * @input A : Head pointer of linked list 
+ * 
+ * @Output head pointer of list.
+ */
+ 
+ 
+listnode* detectCycle(listnode* head) {
+    
+    if(head==NULL){
+        return NULL;
+    }
+    listnode* slow = head;
+    listnode* fast = head;
+    while(fast){
+        if(!fast->next){
+            return NULL;
+        }
+        else{
+            fast = fast->next->next;
+            slow = slow->next;
+            if(slow==fast){
+                break;
+            }
+        }
+    }
+    slow = head;
+    while(slow==fast){
+        slow = slow->next;
+        fast = fast->next;
+    }
+    return slow;
+}
