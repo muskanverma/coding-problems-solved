@@ -1,0 +1,33 @@
+public class Solution {
+    public int[][] generateMatrix(int A) {
+       
+        int[][] a = new int[A][A]; 
+        int count = 0;
+     
+        int x = 0; //1st row
+        int y = A-1; // last col
+        int u = A-1; //last row
+        int v = 0; // 1st col
+        while(x<=u && v<=y ){
+            for(int i=v;i<=y;i++){
+                a[x][i] = ++count;
+            }  
+            ++x; 
+            for(int j=x;j<=u;j++){  
+                a[j][y] = ++count;
+            }
+            y--;
+            for(int k=y;k>=v;k--){
+                a[u][k] = ++count;
+            }
+            u--;
+           
+            for(int m=u;m>=x;m--){
+                a[m][v] = ++count;
+            }
+            v++;
+        }
+        return a;
+        
+    }
+}
