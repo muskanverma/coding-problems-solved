@@ -1,0 +1,41 @@
+/**
+ * @input arrive : Integer array
+ * @input n1 : Integer array's ( arrive ) length
+ * @input depart : Integer array
+ * @input n2 : Integer array's ( depart ) length
+ * @input K : Integer
+ * 
+ * @Output Integer 0 / 1. 0 if not possible, else 1. 
+ */
+ int cmp(const void* a, const void* b){
+     return *(int*) a - *(int*) b;
+ }
+int hotel(int* a, int n1, int* d, int n2, int k) {
+    int i=0,j=0;
+    int r = 0;
+    int flag =1;
+    qsort(a,n1,sizeof(int),cmp);
+    qsort(d,n2,sizeof(int),cmp);
+    while(i<n1&&j<n2){
+        if(a[i]<d[j]){          
+            r++;
+            i++;
+        }
+        else if(a[i]>d[j]){
+            j++;
+            r--;
+        }
+        else{
+            i++;
+            j++;
+        }
+        if(r>k){
+            flag =0;
+        }
+    }
+    
+    return flag;
+    
+}
+
+
