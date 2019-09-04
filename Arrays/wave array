@@ -1,0 +1,23 @@
+/**
+ * @input A : Integer array
+ * @input n1 : Integer array's ( A ) length
+ * 
+ * @Output Integer array. You need to malloc memory, and fill the length in len1
+ */
+ 
+ int cmp(const void* a,const void* b){
+     return *(int*)a - *(int*)b;
+ }
+int* wave(int* a, int n, int *len) {
+    
+    int i;
+    qsort(a,n,sizeof(int),cmp);
+    for(i=0;i<n-1;i= i+2){
+        //int j =i+1;
+        int temp = a[i];
+        a[i]= a[i+1];
+        a[i+1] = temp;
+    }
+    *len = n;
+    return a;
+}
