@@ -1,0 +1,17 @@
+//Leetcode
+
+
+#include<string.h>
+int balancedStringSplit(char * s){
+    int c = 0;
+    int ans = 0;
+    int i =0;
+    while(i<strlen(s)){
+        if(s[i]=='R') c++;
+        else if(s[i]=='L') c--;
+        if(c==0) ans++;
+        i++;
+    }
+    return ans;
+}
+
