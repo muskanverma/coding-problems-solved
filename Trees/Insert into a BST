@@ -1,0 +1,45 @@
+//Leetcode
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+
+
+struct TreeNode* func(struct TreeNode* root, struct TreeNode* nn){
+ 
+    if(root==NULL) return root;
+     if(root->val < nn->val){
+        if(root->right) func(root->right,nn);
+        else{
+            root->right = nn;
+            return root;
+        }
+    }
+     else if(root->val > nn->val){
+        if(root->left) func(root->left,nn);
+        else{
+            root->left = nn;
+            return root;
+        }
+    }
+    return root;
+    
+}
+
+struct TreeNode* insertIntoBST(struct TreeNode* root, int num){
+    
+    struct TreeNode* nN = (struct TreeNode*)malloc(sizeof(struct TreeNode));
+    nN->val = num;
+    nN->left = NULL;
+    nN->right = NULL;
+    
+   return func(root,nN);
+    
+}
+
