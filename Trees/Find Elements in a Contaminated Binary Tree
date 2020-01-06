@@ -1,0 +1,65 @@
+//leetcode
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class FindElements {
+    public: TreeNode* mtree = NULL;
+    public: unordered_set<int>s;
+public:
+    FindElements(TreeNode* root) {
+        
+        deque<TreeNode*>dq;
+        TreeNode* curr = root;
+         dq.push_back(curr);
+        curr = NULL;
+        dq.push_back(curr);
+        curr  = root;
+        int c = 0;
+        root->val = c;
+        while(curr){
+            while(curr){
+                c = curr->val;
+                if(curr->left){
+                    curr->left->val = (2*c)+1;
+                    s.insert(curr->left->val);
+                     dq.push_back(curr->left);
+                }
+                 if(curr->right) {
+                    curr->right->val = (2*c) + 2;
+                     s.insert(curr->right->val);
+                    dq.push_back(curr->right);
+                }
+                
+                   dq.pop_front();
+                curr = dq.front();
+            }
+
+            dq.push_back(curr);
+            dq.pop_front();
+            curr = dq.front();
+            
+        }
+        
+        mtree = root;
+        
+    }
+    
+    bool find(int target) {
+     
+        if(s.find(target)!=s.end()) return true;
+        else return false;
+    }
+};
+
+/**
+ * Your FindElements object will be instantiated and called as such:
+ * FindElements* obj = new FindElements(root);
+ * bool param_1 = obj->find(target);
+ */
