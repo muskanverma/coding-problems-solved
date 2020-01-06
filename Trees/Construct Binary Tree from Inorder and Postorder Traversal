@@ -1,0 +1,42 @@
+//leetcode
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+int searchh(int arr[],int s,int e,int n){
+    for(int i =s;i<=e;i++){
+        if(arr[i]==n){
+            return i;
+        }
+    }
+    return 0;
+}
+
+struct TreeNode* func(int ino[],int post[],int start, int end,int* pp){
+
+    if(start>end) return NULL;
+    int ind = searchh(ino,start,end,post[*pp]);
+    struct TreeNode* nn = (struct TreeNode*)malloc(sizeof(struct TreeNode));
+    nn->val = post[*pp];
+    nn->left = nn->right = NULL;
+    (*pp)--;
+    if(start==end) return nn;
+    nn->right = func(ino,post,ind+1,end,pp);
+    nn->left = func(ino,post,start,ind-1,pp);
+    return nn;
+    
+    
+}
+struct TreeNode* buildTree(int* ino, int is, int* post, int ps){
+
+        int pp = ps-1;
+       return func(ino,post,0,is-1,&pp);
+
+}
+
