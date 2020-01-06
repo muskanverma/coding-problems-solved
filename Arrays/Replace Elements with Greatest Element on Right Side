@@ -1,0 +1,17 @@
+//leetcode
+
+class Solution {
+public:
+    vector<int> replaceElements(vector<int>& arr) {
+        
+        int n = arr.size();
+     int max = -1;
+    for(int i =n-2;i>=0;i--){
+        int t = arr[i+1];
+        arr[i+1] = max;
+        max = t>max ? t : max;
+    }
+    arr[0] = max;
+    return arr;
+    }
+};
